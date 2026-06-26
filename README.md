@@ -12,9 +12,9 @@ A skill for [Claude Code](https://docs.claude.com/en/docs/claude-code).
 [![Claude Code](https://img.shields.io/badge/for-Claude%20Code-d97757)](https://docs.claude.com/en/docs/claude-code)
 [![Geography-first](https://img.shields.io/badge/geography-first-db4f36)](#what-it-does-the-method)
 
-<img src="docs/assets/trip-planner-readme.gif" alt="trip-planner: a loose set of wishes becomes a day-by-day itinerary and a shareable PDF with tappable map links" width="820">
+<img src="docs/assets/trip-planner-readme.gif" alt="trip-planner: the itinerary PDF, then a tap on a stop opening it live in Google Maps" width="760">
 <br>
-<sub><i>One prompt in. A day-by-day itinerary that holds up, shipped as a PDF the group navigates from their phones.</i></sub>
+<sub><i>The PDF is real. Tap any stop and it opens straight in Google Maps, here, Pena Palace in Sintra.</i></sub>
 
 </div>
 
