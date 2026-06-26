@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Trip Itinerary</title>
+<style>
+  :root{
+    --ink:#17181B; --gray:#6B6E73; --faint:#9A9C9F; --paper:#FBFAF7;
+    --accent:#DB4F36; --accent-tint:#FBEAE4; --accent-line:#F0C9BE;
+    --hair:#E7E4DD; --row:#F4F2EC;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ background:var(--paper); color:var(--ink);
+    font-family:"Avenir Next","Helvetica Neue",-apple-system,sans-serif;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  @page{ size:Letter; margin:0; }
+  a{ color:var(--accent); text-decoration:none; }
+  .hero{ padding:13mm 16mm 6mm; background:linear-gradient(180deg,var(--accent-tint) 0%,rgba(0,0,0,0) 92%); }
+  .kicker{ font-size:10.5px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--accent); margin-bottom:14px; }
+  h1{ font-size:52px; font-weight:700; letter-spacing:-.02em; line-height:.98; }
+  .rule{ width:46px; height:3px; background:var(--accent); border-radius:2px; margin:16px 0 14px; }
+  .lede{ font-size:15.5px; line-height:1.5; max-width:62ch; }
+  .meta{ font-size:12.5px; color:var(--gray); margin-top:9px; font-weight:500; }
+  .route{ display:flex; flex-wrap:wrap; align-items:center; gap:8px 9px; margin-top:18px; }
+  .stop{ font-size:11.5px; font-weight:500; background:#fff; border:1px solid var(--hair); border-radius:999px; padding:5px 12px; }
+  .stop.key{ color:var(--accent); border-color:var(--accent-line); background:var(--accent-tint); }
+  .arr{ color:var(--accent); font-size:12px; font-weight:600; }
+  .base{ margin:12px 16mm 0; padding:9px 15px; background:#fff; border:1px solid var(--hair); border-left:3px solid var(--accent); border-radius:10px; font-size:12.5px; line-height:1.48; }
+  .days{ margin-top:4mm; }
+  .day{ display:grid; grid-template-columns:64px 1fr; gap:18px; padding:10px 16mm 11px; break-inside:avoid; }
+  .day + .day{ border-top:1px solid var(--hair); }
+  .num{ font-size:40px; font-weight:600; line-height:.9; color:var(--accent); letter-spacing:-.02em; }
+  .num small{ display:block; font-size:9.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); margin-top:7px; }
+  .dtitle{ font-size:17px; font-weight:600; }
+  .ddate{ font-size:11.5px; font-weight:500; color:var(--gray); margin:1px 0 9px; }
+  .slot{ display:grid; grid-template-columns:58px 1fr; gap:12px; padding:4px 0; }
+  .slot + .slot{ border-top:1px solid var(--row); }
+  .time{ font-size:11.5px; font-weight:600; color:var(--accent); font-variant-numeric:tabular-nums; padding-top:1px; }
+  .what{ font-size:12.8px; line-height:1.45; }
+  .what .sub{ color:var(--gray); }
+  .map{ font-weight:600; border-bottom:1px solid var(--accent-line); white-space:nowrap; }
+  .pill{ display:inline-block; font-size:9.5px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--accent); background:var(--accent-tint); border-radius:6px; padding:1px 7px; margin-left:5px; vertical-align:1px; }
+  .alerts{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:4mm 16mm 0; break-inside:avoid; }
+  .card{ border-radius:12px; padding:14px 16px; }
+  .card h3{ font-size:12.5px; font-weight:700; margin-bottom:9px; }
+  .card ul{ list-style:none; } .card li{ font-size:11.6px; line-height:1.45; padding-left:14px; position:relative; margin-bottom:7px; }
+  .card li:before{ content:""; position:absolute; left:0; top:7px; width:5px; height:5px; border-radius:50%; background:var(--accent); }
+  .lock{ background:var(--accent-tint); border:1px solid var(--accent-line); } .lock h3{ color:var(--accent); }
+  .book{ background:#fff; border:1px solid var(--hair); border-left:3px solid var(--accent); }
+  footer{ margin:4mm 16mm 9mm; padding-top:10px; border-top:1px solid var(--hair); font-size:10.5px; color:var(--gray); line-height:1.5; }
+</style>
+</head>
+<body>
+  <header class="hero">
+    <div class="kicker">Road Trip Itinerary</div>
+    <h1>Lisbon, Sintra &amp; Porto</h1>
+    <div class="rule"></div>
+    <p class="lede">A one-way run up Portugal, from the Tagus to the Douro. Fly into Lisbon, soak up Sintra and the Atlantic edge, then relocate north to Porto and the port cellars of Gaia, no backtrack required.</p>
+    <div class="meta">Sep 10 to 14, 2026 &middot; 4 travelers &middot; one rental SUV</div>
+    <div class="route">
+      <span class="stop">Lisbon (LIS)</span><span class="arr">&rarr;</span>
+      <span class="stop key">Base 1: Lisbon (Alfama)</span><span class="arr">&rarr;</span>
+      <span class="stop">Sintra loop</span><span class="arr">&rarr;</span>
+      <span class="stop key">Base 2: Porto (Ribeira)</span><span class="arr">&rarr;</span>
+      <span class="stop">Porto (OPO)</span>
+    </div>
+  </header>
+  <div class="base"><b>Two bases, one direction.</b> You sleep two nights in central Lisbon (Thu, Fri), then relocate north on Saturday for two nights in Porto (Sat, Sun). The relocation is the point: flying into LIS and out of OPO means Porto cannot be a day trip. A round trip from Lisbon would cost roughly 6 to 7 hours of driving (about 310 km each way), and your departure airport sits on the wrong end. Moving the base north on Saturday turns that into a single A1 leg of about 3 to 3.5 hours, with room for one mid route stop. Keep the SUV parked in a garage in town; Alfama and Ribeira streets are too narrow and steep to drive.</div>
+  <section class="days">
+    <div class="day">
+      <div class="num">01<small>01 Thu Sep 10</small></div>
+      <div>
+        <div class="dtitle">Land in Lisbon, ease into Belem</div>
+        <div class="ddate">Arrival day, stay central, beat the jet lag with a riverside afternoon</div>
+        <div class="slot"><div class="time">11:00a</div><div class="what"><b>Land at Lisbon Airport (LIS).</b> Clear customs, taxi or Uber into <a class="map" href="https://www.google.com/maps/search/?api=1&query=Alfama%2C%20Lisbon">Alfama</a>, drop bags at the hotel. <span class="sub">Do not pick up the car yet; you do not need it in the old town.</span></div></div>
+        <div class="slot"><div class="time">2:00p</div><div class="what"><b>Jeronimos Monastery, Belem.</b> Manueline cloisters and Vasco da Gama's tomb. Timed entry, pre-booked. <span class="sub">Closed Mondays, so today is the window.</span> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Jeronimos%20Monastery%2C%20Belem%2C%20Lisbon">Map</a> <span class="pill">Timed</span></div></div>
+        <div class="slot"><div class="time">4:00p</div><div class="what"><b>Belem Tower.</b> The 16th century river fort, freshly reopened after restoration. Pre-booked slot, walk-ups get turned away. <a class="map" href="https://www.google.com/maps/search/?api=1&query=Belem%20Tower%2C%20Lisbon">Map</a> <span class="pill">Timed</span></div></div>
+        <div class="slot"><div class="time">5:00p</div><div class="what"><b>Pasteis de Belem.</b> The original custard tarts, warm and dusted with cinnamon, two doors from the monastery. <a class="map" href="https://www.google.com/maps/search/?api=1&query=Pasteis%20de%20Belem%2C%20Lisbon">Map</a></div></div>
+        <div class="slot"><div class="time">7:00p</div><div class="what"><b>Dinner in Alfama.</b> Grilled sardines and a glass of vinho verde near the cathedral, then an early night. <a class="map" href="https://www.google.com/maps/search/?api=1&query=Alfama%20restaurants%2C%20Lisbon">Map</a></div></div>
+      </div>
+    </div>
+    <div class="day">
+      <div class="num">02<small>02 Fri Sep 11</small></div>
+      <div>
+        <div class="dtitle">Sintra palaces, then the Atlantic edge</div>
+        <div class="ddate">Pena and Regaleira in the morning, Cabo da Roca and Cascais by afternoon, loop back to Lisbon</div>
+        <div class="slot"><div class="time">9:30a</div><div class="what"><b>Pena Palace, Sintra.</b> The candy colored hilltop palace and its park. Drive from Lisbon is about 30 to 40 minutes. Early timed slot, booked weeks ahead. <a class="map" href="https://www.google.com/maps/search/?api=1&query=Pena%20Palace%2C%20Sintra">Map</a> <span class="pill">Timed</span></div></div>
+        <div class="slot"><div class="time"></div><div class="what"><span class="sub">Drive: Lisbon to Pena Palace, about 29 km, roughly 30 to 40 min. <a class="map" href="https://www.google.com/maps/dir/?api=1&origin=Alfama%2C%20Lisbon&destination=Pena%20Palace%2C%20Sintra">Directions</a></span></div></div>
+        <div class="slot"><div class="time">1:00p</div><div class="what"><b>Quinta da Regaleira.</b> Gothic estate with the spiral Initiation Well and mossy garden tunnels. Same day timed slot, self guided. <a class="map" href="https://www.google.com/maps/search/?api=1&query=Quinta%20da%20Regaleira%2C%20Sintra">Map</a> <span class="pill">Timed</span></div></div>
+        <div class="slot"><div class="time">3:45p</div><div class="what"><b>Cabo da Roca.</b> The westernmost point of mainland Europe, cliffs over the Atlantic, best in late afternoon light. <span class="sub">Exposed and windy even in September, bring a layer.</span> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cabo%20da%20Roca%2C%20Portugal">Map</a></div></div>
+        <div class="slot"><div class="time"></div><div class="what"><span class="sub">Drive: Sintra to Cabo da Roca, about 18 km, roughly 25 to 28 min. <a class="map" href="https://www.google.com/maps/dir/?api=1&origin=Quinta%20da%20Regaleira%2C%20Sintra&destination=Cabo%20da%20Roca%2C%20Portugal">Directions</a></span></div></div>
+        <div class="slot"><div class="time">5:15p</div><div class="what"><b>Cascais.</b> Easygoing beach town for a seafront stroll and an early dinner before the run back. <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cascais%2C%20Portugal">Map</a></div></div>
+        <div class="slot"><div class="time"></div><div class="what"><span class="sub">Drive: Cabo da Roca to Cascais (about 18 km, roughly 30 min), then Cascais back to Lisbon (about 30 km, roughly 30 to 40 min). <a class="map" href="https://www.google.com/maps/dir/?api=1&origin=Cabo%20da%20Roca%2C%20Portugal&waypoints=Cascais%2C%20Portugal&destination=Alfama%2C%20Lisbon">Directions</a></span></div></div>
+      </div>
+    </div>
+    <div class="day">
+      <div class="num">03<small>03 Sat Sep 12</small></div>
+      <div>
+        <div class="dtitle">Relocate north on the A1, one stop only</div>
+        <div class="ddate">Check out of Lisbon, drive to Porto with a single mid route break, settle into Ribeira</div>
+        <div class="slot"><div class="time">9:00a</div><div class="what"><b>Check out and leave Lisbon by 9:00.</b> Today is a logistics day, do not over schedule it. <span class="sub">A1 toll is about EUR 23; the road is electronic toll, so confirm the Via Verde device.</span></div></div>
+        <div class="slot"><div class="time"></div><div class="what"><span class="sub">Drive: Lisbon to Aveiro on the A1, about 250 km, roughly 2.5 hours. <a class="map" href="https://www.google.com/maps/dir/?api=1&origin=Lisbon%2C%20Portugal&destination=Aveiro%2C%20Portugal">Directions</a></span></div></div>
+        <div class="slot"><div class="time">11:45a</div><div class="what"><b>Aveiro (the lighter stop).</b> Canals, candy striped moliceiro boats and a quick lunch, about 1.5 to 2 hours off the motorway. <span class="sub">Swap for Coimbra only if you pre-booked a Joanina Library slot.</span> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Aveiro%2C%20Portugal">Map</a></div></div>
+        <div class="slot"><div class="time"></div><div class="what"><span class="sub">Drive: Aveiro to Porto on the A1, about 75 km, roughly 50 min. <a class="map" href="https://www.google.com/maps/dir/?api=1&origin=Aveiro%2C%20Portugal&destination=Ribeira%2C%20Porto">Directions</a></span></div></div>
+        <div class="slot"><div class="time">3:30p</div><div class="what"><b>Check in, Porto Ribeira.</b> Park the SUV in a pre-booked Gaia or Trindade garage and leave it there until Monday. <a class="map" href="https://www.google.com/maps/search/?api=1&query=Ribeira%2C%20Porto">Map</a></div></div>
+        <div class="slot"><div class="time">7:00p</div><div class="what"><b>Evening on the Cais da Ribeira.</b> Sunset over the Dom Luis I bridge and dinner by the river, nothing else booked tonight. <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cais%20da%20Ribeira%2C%20Porto">Map</a></div></div>
+      </div>
+    </div>
+    <div class="day">
+      <div class="num">04<small>04 Sun Sep 13</small></div>
+      <div>
+        <div class="dtitle">Porto historic core and the Douro</div>
+        <div class="ddate">Lello and Clerigos early, then your choice of a full Douro day or the Gaia port cellars</div>
+        <div class="slot"><div class="time">9:00a</div><div class="what"><b>Livraria Lello.</b> The carved staircase bookshop, busiest 11:00 to 14:00, so go at opening. Voucher redeems against a book. <a class="map" href="https://www.google.com/maps/search/?api=1&query=Livraria%20Lello%2C%20Porto">Map</a> <span class="pill">Timed</span></div></div>
+        <div class="slot"><div class="time">10:15a</div><div class="what"><b>Clerigos Tower.</b> Climb the baroque tower for the rooftop view over the old town. Ticket covers tower, church and museum. <a class="map" href="https://www.google.com/maps/search/?api=1&query=Clerigos%20Tower%2C%20Porto">Map</a></div></div>
+        <div class="slot"><div class="time">12:00p</div><div class="what"><b>Option 1, Douro Valley day tour.</b> Small group, two quintas, tastings, lunch and a Rabelo cruise near Pinhao. Returns about 18:00, so it must be today, not Monday. <a class="map" href="https://www.google.com/maps/search/?api=1&query=Douro%20Valley%2C%20Pinhao">Map</a> <span class="pill">Pre-booked</span></div></div>
+        <div class="slot"><div class="time">2:00p</div><div class="what"><b>Option 2, port cellars in Vila Nova de Gaia.</b> If you skip the Douro, cross the bridge for a reserved tour and tasting at Taylor's, Graham's or Sandeman. <a class="map" href="https://www.google.com/maps/search/?api=1&query=Vila%20Nova%20de%20Gaia%20port%20cellars">Map</a> <span class="pill">Pre-booked</span></div></div>
+        <div class="slot"><div class="time">7:30p</div><div class="what"><b>Dinner in Porto.</b> A francesinha and a glass of tawny back in the Baixa to close out the Porto leg. <a class="map" href="https://www.google.com/maps/search/?api=1&query=Porto%20Baixa%20restaurants">Map</a></div></div>
+      </div>
+    </div>
+    <div class="day">
+      <div class="num">05<small>05 Mon Sep 14</small></div>
+      <div>
+        <div class="dtitle">Porto morning, evening flight out of OPO</div>
+        <div class="ddate">A short open core morning, then return the car and fly home. Note: many museums close Mondays</div>
+        <div class="slot"><div class="time">9:30a</div><div class="what"><b>Gaia riverside and a final tasting.</b> The port lodges stay open Mondays, so a last cellar visit or a walk along the Gaia quay works. <span class="sub">Belem, Jeronimos and Belem Tower are closed today, which is why they sat on Day 1.</span> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Vila%20Nova%20de%20Gaia%20riverside">Map</a></div></div>
+        <div class="slot"><div class="time">12:00p</div><div class="what"><b>Collect the SUV and head to OPO.</b> Pull the car from the garage and drive out to the airport. <a class="map" href="https://www.google.com/maps/search/?api=1&query=Porto%20Airport%20OPO">Map</a></div></div>
+        <div class="slot"><div class="time"></div><div class="what"><span class="sub">Drive: Ribeira to Porto Airport (OPO), about 17 km, roughly 25 to 30 min. <a class="map" href="https://www.google.com/maps/dir/?api=1&origin=Ribeira%2C%20Porto&destination=Porto%20Airport%20OPO">Directions</a></span></div></div>
+        <div class="slot"><div class="time">1:30p</div><div class="what"><b>Return the car, then bag drop.</b> Return the one way rental at OPO and clear security with a 3 hour international buffer before the evening flight. <span class="sub">Back plan the exact departure time and work backwards from it.</span></div></div>
+      </div>
+    </div>
+  </section>
+  <section class="alerts">
+    <div class="card lock"><h3>Two things that cannot slip</h3><ul>
+      <li>The one way LIS to OPO automatic SUV, with the drop fee and a Via Verde toll device confirmed. Book today: automatics and one way allocations disappear first, and the whole route depends on the car existing.</li>
+      <li>An early Pena Palace timed slot for Fri Sep 11, paired with a same day Regaleira slot. Book now on parquesdesintra.pt; without it the Sintra, Cabo da Roca and Cascais loop collapses under a roughly 3 hour walk-up queue.</li>
+    </ul></div>
+    <div class="card book"><h3>Book before it sells out</h3><ul>
+      <li>One way LIS to OPO automatic SUV: about EUR 250 to 450 for the car, plus a one way drop fee of EUR 50 to 150, Via Verde toll device about EUR 2 per day, and the A1 toll about EUR 23. Book 2 to 3 months out, so now.</li>
+      <li>Pena Palace full ticket (park plus interior), early Fri Sep 11: EUR 20 per person on parquesdesintra.pt. Morning slots go weeks ahead.</li>
+      <li>Quinta da Regaleira, Fri Sep 11 afternoon: EUR 15 per person, self guided, on regaleira.byblueticket.pt. Pair same day with Pena.</li>
+      <li>Jeronimos plus Belem Tower timed slots, Thu Sep 10 afternoon: about EUR 18 to 20 combined. The only Belem window, since Monday is closed.</li>
+      <li>Douro Valley small group day tour, Sun Sep 13: EUR 85 to 120 per person, 2 to 4 weeks out. Not Monday.</li>
+      <li>Livraria Lello voucher, about 9:00 slot Sun or Mon: EUR 10 per person, redeemable against a book.</li>
+    </ul></div>
+  </section>
+  <footer>Tap any link to open the spot in Google Maps; the drive legs open turn by turn directions. Weather: mid September in Portugal is mild and dry, roughly 18 to 27 C, with cool, windy evenings on the coast and at Cabo da Roca, so pack a light layer for after dark.</footer>
+</body>
+</html>
